@@ -20,7 +20,10 @@ class App extends React.Component {
         
         });
     } 
-
+    
+    removeSelectedVideo = () => {
+        console.log(this.state.videos); 
+    }
     onVideoSelect = (video) => {
         this.setState({selectedVideo: video});  
     }
@@ -30,14 +33,15 @@ class App extends React.Component {
                 <SearchBar onSearchSubmit={this.onSearchSubmit}/>
                 <div className="ui grid">
                     <div className="ui row">
-                       
-                        <div className="eleven wide column">
-                            <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos}/>
+                        <div className={!this.state.selectedVideo ? 'not formated' : 'eleven wide column'}>
+                            <VideoDetail video={this.state.selectedVideo} />
                         </div>
-                        
+                        <div className="five wide column">
+                            <VideoList selectedVideo={this.state.selectedVideo} onVideoSelect={this.onVideoSelect} videos={this.state.videos}/>
+                        </div>
                     </div>
                 </div>
-               
+
             </div>
         )
     }; 

@@ -3,6 +3,16 @@ import React from 'react';
 const VideoDetail = ({video}) => {
     if(!video) {
         return <div></div>
+    } 
+
+    if (video.id.kind === "youtube#channel") {
+        return (
+            <div>
+                <img className="ui medium circular image" alt={video.snippet.channelTitle} src={video.snippet.thumbnails.medium.url}/>
+                <h3>{video.snippet.channelTitle}</h3>
+            </div>
+        );
+       
     }
 
     const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`; 
@@ -12,8 +22,9 @@ const VideoDetail = ({video}) => {
                 <iframe title="video player" src={videoSrc} />
             </div>
             <div className="ui segment">
-                <h4 className="ui header">{video.snippet.title}</h4>
-                <p>{video.snippet.description}</p>
+                <h3>{video.snippet.title}</h3>
+                <h4 className="ui header">Title: {video.snippet.title}</h4>
+                <p>Description: {video.snippet.description}</p>
             </div>
             
         </div>
